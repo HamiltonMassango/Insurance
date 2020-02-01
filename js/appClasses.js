@@ -1,4 +1,3 @@
-// Variables 
 const form = document.getElementById('request-quote')
 const html =  new HTMLUI();
 
@@ -6,7 +5,6 @@ eventListener();
 
 function eventListener(){
     //  Event Listeners 
-
     document.addEventListener('DOMContentLoaded', () => {
         // Create the <option> for the years 
         
@@ -38,18 +36,18 @@ function eventListener(){
 
     });
 }
-
-// Object 
+// Class  
 
 // Everything related to the quotation and calculations is Insurance 
-function Insurance(make, year, level){
+
+// Calculate the price for the current quotation 
+class Insurance {
+   constructor (make, year, level){
     this.make = make;
     this.year = year;
     this.level = level;
 }
-// Calculate the price for the current quotation 
-
-Insurance.prototype.calculateQuotation = function (){
+calculateQuotation () {
     let price;
     const base = 2000;
 
@@ -84,31 +82,30 @@ Insurance.prototype.calculateQuotation = function (){
    price = this.calculateLevel(price);
    return price;
 }
-
 // Returns the difference between years 
-
-Insurance.prototype.getYearDiffence = function (year) {
+getYearDiffence (year) {
     return new Date().getFullYear() - year;
 }
 // Adds the value based on the level of protoction 
-Insurance.prototype.calculateLevel = function (price){
-        /*
-            Basic insurance is going to increase the value by 30%
-            Complete insurance is going increaste the value by 50%
-        */
-       if(this.level === 'basic') {
-           price = price * 1.30;
-       } else {
-           price = price * 1.50;
-       }
-    return price;
+calculateLevel (price){
+    /*
+        Basic insurance is going to increase the value by 30%
+        Complete insurance is going increaste the value by 50%
+    */
+   if(this.level === 'basic') {
+       price = price * 1.30;
+   } else {
+       price = price * 1.50;
+   }
+return price;
 }
-
-function HTMLUI(){}
-
-// Displays the latest 28 years in the select 
-
-HTMLUI.prototype.displayYears = function (){
+}
+class HTMLUI {
+    constructor (){
+        this.name = ` name of class is ${this}`;
+    }
+    
+    displayYears(){
     // Max & min years 
     const max = new Date().getFullYear(),
           min = max - 20;
@@ -120,26 +117,23 @@ HTMLUI.prototype.displayYears = function (){
         option.textContent = i;
         selectYears.appendChild(option);
     }
-    
-}
-
-HTMLUI.prototype.displayError = function (message){
-  // create a div 
-  const div = document.createElement("div");
-  div.classList = 'error';
-
-  // insert the message 
-    div.innerHTML = `
-        <p>${message}</p>
-    `;
-    form.insertBefore(div, document.querySelector('.form-group'));
-    setTimeout(function(){
-        document.querySelector('.error').remove();
-    }, 3000);
-}
-
-// Prints the result into the HTMLUI
-HTMLUI.prototype.showResults = function (price, insurance){
+    }
+    displayError (message){
+        // create a div 
+        const div = document.createElement("div");
+        div.classList = 'error';
+      
+        // insert the message 
+          div.innerHTML = `
+              <p>${message}</p>
+          `;
+          form.insertBefore(div, document.querySelector('.form-group'));
+          setTimeout(function(){
+              document.querySelector('.error').remove();
+          }, 3000);
+      }
+      // Prints the result into the HTMLUI
+    showResults (price, insurance){
     // Print the result 
     const result = document.getElementById('result');
     // Create a div for out result  
@@ -178,6 +172,5 @@ HTMLUI.prototype.showResults = function (price, insurance){
         result.appendChild(div);
     }, 1500);
 
-
-   
+}
 }

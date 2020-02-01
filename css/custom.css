@@ -1,3 +1,10 @@
+@font-face{
+    font-family: 'T';
+    src: url('../roboto/Roboto-Thin.woff2');
+}
+*{
+    font-family: 'T';
+}
 body {
     background: #e96443;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #904e95, #e96443);  /* Chrome 10-25, Safari 5.1-6 */
